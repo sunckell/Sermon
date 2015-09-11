@@ -190,8 +190,6 @@ def check_environment():
         environment = 'QUAL'
     elif env_abbreviation.upper() == 'P':
         environment = 'PROD'
-    elif env_abbreviation.upper() == 'X':
-        environment = 'PROD'
     else:
         environment = 'SANDBOX'
 
@@ -280,8 +278,6 @@ def record_logged_in_user_info(ms):
         record_logged_in_user_info() - gather information pertaining to the logged in users
     """
 
-    #ms = monitor.system.System()
-    #cu = common.utilities.Utilities()
     lu = ms.get_users()
 
     my_logger.info('Logged In User Info:')
@@ -291,10 +287,10 @@ def record_logged_in_user_info(ms):
     for user in lu:
         count += 1
         my_logger.info('  User[' + str(count) + ']: %s' % user.name)
-        my_logger.info('              \_ terminal: %s' % user.terminal)
-        my_logger.info('              \_ host:     %s' % user.host)
+        my_logger.info(r'              \_ terminal: %s' % user.terminal)
+        my_logger.info(r'              \_ host:     %s' % user.host)
         since = cu.convert_time_from_epoch(user.started)
-        my_logger.info('              \_ since:    %s' % since)
+        my_logger.info(r'              \_ since:    %s' % since)
 
 # ---
 # ---  Function:
@@ -317,29 +313,26 @@ def record_memory_state(ms):
                                   state of the system.
     """
 
-    #ms  = monitor.system.System() 
     vm = ms.get_memory_info()
     sm = ms.get_swap_info()
 
-    #cu = common.utilities.Utilities()
-
     my_logger.info('Virtual Memory Stats:')
-    my_logger.info('              \_ vm Total bytes:  %s' % vm[0])
-    my_logger.info('              \_ vm Avail bytes:  %s' % vm[1])
-    my_logger.info('              \_ vm Percent used: %s' % vm[2])
-    my_logger.info('              \_ vm Total used:   %s' % vm[3])
-    my_logger.info('              \_ vm Total free:   %s' % vm[4])
-    my_logger.info('              \_ vm Active:       %s' % vm[5])
-    my_logger.info('              \_ vm Inactive:     %s' % vm[6])
-    my_logger.info('              \_ vm Buffered:     %s' % vm[7])
-    my_logger.info('              \_ vm Cached:       %s' % vm[8])
+    my_logger.info(r'              \_ vm Total bytes:  %s' % vm[0])
+    my_logger.info(r'              \_ vm Avail bytes:  %s' % vm[1])
+    my_logger.info(r'              \_ vm Percent used: %s' % vm[2])
+    my_logger.info(r'              \_ vm Total used:   %s' % vm[3])
+    my_logger.info(r'              \_ vm Total free:   %s' % vm[4])
+    my_logger.info(r'              \_ vm Active:       %s' % vm[5])
+    my_logger.info(r'              \_ vm Inactive:     %s' % vm[6])
+    my_logger.info(r'              \_ vm Buffered:     %s' % vm[7])
+    my_logger.info(r'              \_ vm Cached:       %s' % vm[8])
     my_logger.info('Swap Memory Stats:')
-    my_logger.info('              \_ sw Total bytes:    %s' % sm[0])
-    my_logger.info('              \_ sw Used bytes:     %s' % sm[1])
-    my_logger.info('              \_ sw Free bytes:     %s' % sm[2])
-    my_logger.info('              \_ sw Percent Used:   %s' % sm[3])
-    my_logger.info('              \_ sw Swap in bytes:  %s' % sm[4])
-    my_logger.info('              \_ sw Swap out bytes: %s' % sm[5])
+    my_logger.info(r'              \_ sw Total bytes:    %s' % sm[0])
+    my_logger.info(r'              \_ sw Used bytes:     %s' % sm[1])
+    my_logger.info(r'              \_ sw Free bytes:     %s' % sm[2])
+    my_logger.info(r'              \_ sw Percent Used:   %s' % sm[3])
+    my_logger.info(r'              \_ sw Swap in bytes:  %s' % sm[4])
+    my_logger.info(r'              \_ sw Swap out bytes: %s' % sm[5])
 
 # ---
 # ---  Function:
@@ -410,14 +403,14 @@ def record_network_io_counters(ms):
     nc = ms.get_net_io_counters()
     for k, v in nc.items():
         my_logger.info('  Network Device Name: %s ' % k)
-        my_logger.info('              \_ ' + k + ' Total bytes sent:   %s' % v.bytes_sent)
-        my_logger.info('              \_ ' + k + ' Total bytes recv:   %s' % v.bytes_recv)
-        my_logger.info('              \_ ' + k + ' Total packets sent: %s' % v.packets_sent)
-        my_logger.info('              \_ ' + k + ' Total packets recv: %s' % v.packets_recv)
-        my_logger.info('              \_ ' + k + ' Total errors in:    %s' % v.errin)
-        my_logger.info('              \_ ' + k + ' Total errors out:   %s' % v.errout)
-        my_logger.info('              \_ ' + k + ' Total dropped in:   %s' % v.dropin)
-        my_logger.info('              \_ ' + k + ' Total dropped out:  %s' % v.dropout)
+        my_logger.info(r'              \_ ' + k + ' Total bytes sent:   %s' % v.bytes_sent)
+        my_logger.info(r'              \_ ' + k + ' Total bytes recv:   %s' % v.bytes_recv)
+        my_logger.info(r'              \_ ' + k + ' Total packets sent: %s' % v.packets_sent)
+        my_logger.info(r'              \_ ' + k + ' Total packets recv: %s' % v.packets_recv)
+        my_logger.info(r'              \_ ' + k + ' Total errors in:    %s' % v.errin)
+        my_logger.info(r'              \_ ' + k + ' Total errors out:   %s' % v.errout)
+        my_logger.info(r'              \_ ' + k + ' Total dropped in:   %s' % v.dropin)
+        my_logger.info(r'              \_ ' + k + ' Total dropped out:  %s' % v.dropout)
 
 # ---
 # ---  Function:
