@@ -214,8 +214,8 @@ def record_general_system_info():
     """
 
     ms = monitor.system.System()
-    pi = ms.get_platform_info
-    ut = ms.get_uptime
+    pi = ms.get_platform_info()
+    ut = ms.get_uptime()
     ips = ms.get_ip_addresses()
 
     my_logger.info('system node:        %s ' % pi['node'])
@@ -245,14 +245,13 @@ def record_general_cpu_info(ms):
         record_general_cpu_info() - gather general CPU information about the system we are running on.
     """
 
-    #ms = monitor.system.System()
-    cpu_ct = ms.get_cpu_count
-    cpu_info = ms.get_cpu_util_per_cpu
+    cpu_ct = ms.get_cpu_count()
+    cpu_info = ms.get_cpu_util_per_cpu()
 
     my_logger.info('CPU Count:          %s ' % cpu_ct)
     my_logger.info('Utilization Per CPU: non-blocking, ie.  percentage since last check.')
     for cpu_num, perc in enumerate(cpu_info):
-        my_logger.info("              \_CPU%-2s      %5s%%" % (cpu_num, perc))
+        my_logger.info(r"              \_CPU%-2s      %5s%%" % (cpu_num, perc))
 
     load_average = '1min: {la[0]}  5mins: {la[1]}  15mins: {la[2]}'.format(la=os.getloadavg())
     my_logger.info('Load Averages: %s ' % load_average)
@@ -490,7 +489,7 @@ def record_process_cpu_info(ms, count):
         # TIME+ column shows process CPU cumulative time and it is expressed as: "mm:ss.ms"
         ctime = timedelta(seconds=sum(p._cpu_times))
         ctime = "%s:%s.%s" % (ctime.seconds // 60 % 60,
-                            str((ctime.seconds % 60)).zfill(2),
+                            str(ctime.seconds % 60).zfill(2),
                             str(ctime.microseconds)[:2])
 
         my_logger.info(cpu_templ % (p.pid,

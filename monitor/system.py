@@ -19,16 +19,15 @@ class System(object):
         """
         Constructor
         """
-
-    @property
-    def get_uptime(self):
+    @staticmethod
+    def get_uptime():
         with open('/proc/uptime', 'r') as f:
             uptime_seconds = float(f.readline().split()[0])
             uptime_string = str(timedelta(seconds = uptime_seconds))
             return uptime_string
 
-    @property
-    def get_platform_info(self):
+    @staticmethod
+    def get_platform_info():
         """
         getPlatformInfo = returns a dictionary filled with platform specific information.
         """
@@ -38,40 +37,48 @@ class System(object):
 
         return p
 
-    @property
-    def get_cpu_count(self):
+    @staticmethod
+    def get_cpu_count():
         return psutil.NUM_CPUS
 
-    @property
-    def get_cpu_util_per_cpu(self):
+    @staticmethod
+    def get_cpu_util_per_cpu():
         return psutil.cpu_percent(interval=0, percpu=True)
 
-    def get_memory_info(self):
+    @staticmethod
+    def get_memory_info():
         return psutil.virtual_memory()
 
-    def get_swap_info(self):
+    @staticmethod
+    def get_swap_info():
         return psutil.swap_memory()
 
-    def get_disk_partitions(self):
+    @staticmethod
+    def get_disk_partitions():
         return psutil.disk_partitions(all=False)
 
-    def get_disk_usage(self,m):
+    @staticmethod
+    def get_disk_usage(m):
         return psutil.disk_usage(m)
 
     @staticmethod
     def get_disk_io_counters():
         return psutil.disk_io_counters(perdisk=True)
 
-    def get_net_io_counters(self):
+    @staticmethod
+    def get_net_io_counters():
         return psutil.network_io_counters(pernic=True)
 
-    def get_users(self):
+    @staticmethod
+    def get_users():
         return psutil.get_users()
 
-    def get_ip_addresses(self):
+    @staticmethod
+    def get_ip_addresses():
         return [ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith("127.")][:1]
 
-    def poll_io_stats_per_proc(self,interval):
+    @staticmethod
+    def poll_io_stats_per_proc(interval):
         """
             Calculate IO usage by comparing IO statics before and after the interval.
             Return a tuple including all currently running processes Return a tuple 
@@ -117,7 +124,8 @@ class System(object):
 
         return (processes, disks_read_per_sec, disks_write_per_sec)
 
-    def poll_cpu_info_per_process(self):
+    @staticmethod
+    def poll_cpu_info_per_process():
         """
             Gather CPU usages via TOP style.
         """
