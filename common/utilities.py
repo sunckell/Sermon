@@ -1,16 +1,17 @@
 import time
 
 class Utilities(object):
-    '''
+    """
     Utilities class - provides definitions for comman tasks.
-    '''
+    """
 
     def __init__(self):
         '''
         Constructor
         '''
 
-    def bytes2human(self,n):
+    @staticmethod
+    def bytes2human(n):
         # http://code.activestate.com/recipes/578019
         # >>> bytes2human(10000)
         # '9.8K'
@@ -26,5 +27,6 @@ class Utilities(object):
                 return '%.1f%s' % (value, s)
         return "%sB" % n
 
-    def convert_time_from_epoch(self,n):
-        return  time.ctime(n)
+    @staticmethod
+    def convert_time_from_epoch(n):
+        return time.ctime(n)

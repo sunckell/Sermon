@@ -122,7 +122,7 @@ class System(object):
         # sort processes by total disk IO so that the more intensive ones get listed first
         processes = sorted(procs, key=lambda p: p._total, reverse=True)
 
-        return (processes, disks_read_per_sec, disks_write_per_sec)
+        return processes, disks_read_per_sec, disks_write_per_sec
 
     @staticmethod
     def poll_cpu_info_per_process():
@@ -158,4 +158,4 @@ class System(object):
 
         # return processes sorted by CPU percent usage
         processes = sorted(procs, key=lambda p: p._cpu_percent, reverse=True)
-        return (processes, procs_status) 
+        return processes, procs_status
