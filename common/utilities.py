@@ -6,9 +6,9 @@ class Utilities(object):
     """
 
     def __init__(self):
-        '''
+        """
         Constructor
-        '''
+        """
 
     @staticmethod
     def bytes2human(n):

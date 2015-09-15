@@ -442,10 +442,10 @@ def record_disk_io_counters(ms, interval, count):
     count = int(count)
     for p in procs:
         my_logger.info(disk_io_templ % (p.pid,
-                            p._username[:8],
+                            p._username(),
                             cu.bytes2human(p._read_per_sec),
                             cu.bytes2human(p._write_per_sec),
-                            p._cmdline[:60]))
+                            p._cmdline()))
         count -= 1
         if count <= 0:
             return

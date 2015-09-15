@@ -2,6 +2,7 @@
   <dictionary name="ckell">
     <words>
       <w>asctime</w>
+      <w>ckell</w>
       <w>ctime</w>
       <w>filestokeep</w>
       <w>levelname</w>
@@ -9,8 +10,11 @@
       <w>loggingdir</w>
       <w>loglevel</w>
       <w>logsize</w>
+      <w>meminfo</w>
+      <w>mempercent</w>
       <w>mins</w>
       <w>perc</w>
+      <w>proc</w>
       <w>procs</w>
       <w>stdout</w>
       <w>templ</w>

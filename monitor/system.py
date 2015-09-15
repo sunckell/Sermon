@@ -1,8 +1,8 @@
-'''
+"""
 Created on Sep 24, 2012
 
 @author: ckell
-'''
+"""
 from datetime import timedelta
 import socket
 import platform
@@ -102,7 +102,7 @@ class System(object):
         for p in procs[:]:
             try:
                 p._after = p.get_io_counters()
-                p._cmdline = ' '.join(p.cmdline)
+                p._cmdline = p.cmdline
                 if not p._cmdline:
                     p._cmdline = p.name
                 p._username = p.username
@@ -112,11 +112,11 @@ class System(object):
 
         # finally calculate results by comparing data before and after the interval
         for p in procs:
-            p._read_per_sec  = p._after.read_bytes - p._before.read_bytes
+            p._read_per_sec = p._after.read_bytes - p._before.read_bytes
             p._write_per_sec = p._after.write_bytes - p._before.write_bytes
             p._total = p._read_per_sec + p._write_per_sec
 
-        disks_read_per_sec  = disks_after.read_bytes - disks_before.read_bytes
+        disks_read_per_sec = disks_after.read_bytes - disks_before.read_bytes
         disks_write_per_sec = disks_after.write_bytes - disks_before.write_bytes
 
         # sort processes by total disk IO so that the more intensive ones get listed first
@@ -131,24 +131,20 @@ class System(object):
         """
 
         procs = [p for p in psutil.process_iter()]  # the current process list
-        #cpids = [p.pid for p in procs]     
-        #for p in psutil.process_iter():         
-        #    if p.pid not in cpids:             
-        #        procs.append(p)      
-        # sleep some time     
+
         time.sleep(2) 
 
         procs_status = {}
 
         for p in procs[:]:
             try:
-                p._username    = p.username
-                p._nice        = p.nice
-                p._meminfo     = p.get_memory_info()
-                p._mempercent  = p.get_memory_percent()
+                p._username = p.username()
+                p._nice = p.nice()
+                p._meminfo = p.get_memory_info()
+                p._mempercent = p.get_memory_percent()
                 p._cpu_percent = p.get_cpu_percent(interval=0)
-                p._cpu_times   = p.get_cpu_times()
-                p._name        = p.name
+                p._cpu_times = p.get_cpu_times()
+                p._name = p.name()
                 try:
                     procs_status[str(p.status)] += 1
                 except KeyError:
